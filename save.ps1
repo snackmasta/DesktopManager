@@ -49,3 +49,4 @@ Stop-Process -Name explorer -Force
 
 # Write the content to the new .ps1 script file
 $scriptContent | Out-File -FilePath "C:\Program Files\currone\DesktopManager\profiles\$nameWithoutExtension.ps1" -Encoding ascii
+Invoke-PS2EXE "C:\Program Files\currone\DesktopManager\profiles\$nameWithoutExtension.ps1" "C:\Program Files\currone\DesktopManager\bin\$nameWithoutExtension.exe" -requireAdmin

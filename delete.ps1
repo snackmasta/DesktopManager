@@ -20,11 +20,13 @@ if ($choice -ge 1 -and $choice -le $profiles.Count) {
     $directoryPath = Get-Content -Path "C:\Program Files\currone\DesktopManager\data\directory.txt"
     $regPath = "C:\Program Files\currone\DesktopManager\reg\" + $selectedProfile
     $scriptPath = "C:\Program Files\currone\DesktopManager\profiles\" + $selectedProfileWithoutExtension + ".ps1"
+    $binaryPath = "C:\Program Files\currone\DesktopManager\bin\" + $selectedProfileWithoutExtension + ".exe"
 
     # Perform the desired action with the selected profile and directory path
     Remove-Item -Path ($directoryPath + "\" + $selectedProfileWithoutExtension) -Recurse -Force
     Remove-Item -Path $regPath
     Remove-Item -Path $scriptPath
+    Remove-Item -Path $binaryPath
 
     Write-Host $selectedProfileWithoutExtension
     Start-Sleep 5
