@@ -26,11 +26,17 @@ function Select-ProfileLocation {
     }
 }
 
-$selectedFolder = Select-AppLocation
+$sourceLocation = Select-AppLocation
 $profileLocation = Select-ProfileLocation
-if ($selectedFolder) {
-    Write-Output "Selected folder: $selectedFolder"
-    Write-Output "Selected folder: $profileLocation"
+
+if ($sourceLocation -and $profileLocation) {
+    # append the string to txt file
+    New-Item -ItemType Directory -Path (Join-Path -Path $sourceLocation -ChildPath "currone\DesktopManager\data")
+    $sourceFile = Join-Path -Path $sourceLocation -ChildPath "currone\DesktopManager\data\appDir.txt"
+    $profileFile = Join-Path -Path $profileLocation -ChildPath "currone\DesktopManager\data\deskDir.txt"
+    Add-Content -Path $sourceFile -Value $sourceLocation
+    Add-Content -Path $profileFile -Value $profileLocation
+
 } else {
     Write-Output "No folder selected."
 }
