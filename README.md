@@ -84,6 +84,3 @@ Contributions are welcome! Feel free to submit issues or pull requests for impro
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
-
-This `README.md` file provides an overview of the software, installation instructions, usage examples, and contributing guidelines. Feel free to adjust the content based on specific details and requirements of your project.

@@ -1,8 +1,21 @@
-$profiles = Get-ChildItem "C:\Program Files\currone\DesktopManager\reg"
+$profiles = Get-ChildItem "C:\Program Files\currone\DesktopManager\reg" | Sort-Object LastWriteTime -Descending
 
 # Display the list with numbered items and last modified time
 for ($i = 0; $i -lt $profiles.Count; $i++) {
-    Write-Host ("{0}. {1} (Last Modified: {2})" -f ($i + 1), $profiles[$i].Name, $profiles[$i].LastWriteTime)
+    $lastModifiedDate = $profiles[$i].LastWriteTime
+    $timeDifference = New-TimeSpan -Start $lastModifiedDate -End (Get-Date)
+
+    if ($timeDifference.TotalHours -lt 24) {
+        $lastModifiedInfo = "{0} hours ago" -f [math]::Round($timeDifference.TotalHours)
+    } elseif ($timeDifference.TotalDays -lt 7) {
+        $lastModifiedInfo = "{0} days ago" -f [math]::Round($timeDifference.TotalDays)
+    } elseif ($timeDifference.TotalDays -lt 30) {
+        $lastModifiedInfo = "{0} weeks ago" -f [math]::Round($timeDifference.TotalDays / 7)
+    } else {
+        $lastModifiedInfo = $lastModifiedDate.ToString("yyyy-MM-dd HH:mm:ss")
+    }
+
+    Write-Host ("{0}. {1} (Last Modified: {2})" -f ($i + 1), $profiles[$i].Name, $lastModifiedInfo)
 }
 
 # Prompt the user to pick a number

@@ -6,7 +6,9 @@ do {
         $lastModifiedDate = $profiles[$i].LastWriteTime
         $timeDifference = New-TimeSpan -Start $lastModifiedDate -End (Get-Date)
 
-        if ($timeDifference.TotalHours -lt 24) {
+        if ($timeDifference.TotalMinutes -lt 60) {
+            $lastModifiedInfo = "{0} minutes ago" -f [math]::Round($timeDifference.TotalMinutes)
+        } elseif ($timeDifference.TotalHours -lt 24) {
             $lastModifiedInfo = "{0} hours ago" -f [math]::Round($timeDifference.TotalHours)
         } elseif ($timeDifference.TotalDays -lt 7) {
             $lastModifiedInfo = "{0} days ago" -f [math]::Round($timeDifference.TotalDays)
@@ -45,10 +47,13 @@ do {
         $path = "C:\Program Files\currone\DesktopManager\bin"
         [System.Diagnostics.Process]::Start($path + "\\" + $selectedProfileWithoutExtension)
 
-        
+        # Clear console
+        Clear-Host
 
     } else {
         Write-Host "Invalid selection. Please try again."
+        # Clear console
+        Clear-Host
     }
 
 } while ($true)
