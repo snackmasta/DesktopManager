@@ -41,7 +41,7 @@ Start-Process -NoNewWindow -FilePath "robocopy" -ArgumentList "E:\Obsidian\shigo
 
 # Write "done" to the console
 Write-Output "done"
-Start-Process "regedit.exe" -ArgumentList "/s", '"C:\Program Files\currone\DesktopManager\reg\$nameWithoutExtension.reg"' -NoNewWindow -Wait | Wait-Process
+regedit.exe /s '"C:\Program Files\currone\DesktopManager\reg\$nameWithoutExtension.reg"'
 Stop-Process -Name explorer -Force
 "@
 
