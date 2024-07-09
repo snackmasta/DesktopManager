@@ -102,7 +102,7 @@ do {
     $choiceInt = [System.Convert]::ToInt32($choice)
     $choiceString = $choice.ToString()
 
-    if ($choiceInt -ge 1 -and $choiceInt -le $profiles.Count) {
+    if ($choiceInt -ge 1 -and $choiceInt -le $profiles.Count -and $choiceString -ne "save") {
         Get-Profile
         # Clear console
         Clear-Host
