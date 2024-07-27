@@ -104,13 +104,21 @@ do {
 
     if ($choiceInt -ge 1 -and $choiceInt -le $profiles.Count -and $choiceString -ne "save") {
         Get-Profile
+        $choiceInt = 0
+        $choiceString = "a"
         # Clear console
         Clear-Host
     } elseif ($choiceString -eq "save") {
         # Call the Find-Profile function
         $profileNames = Save-Profile
         Write-Host "Found profiles: $profileNames"
+        $choiceInt = 0
+        $choiceString = "a"
         # Clear console
+        Clear-Host
+    } elseif ($choiceString -ne "save") {
+        $choiceInt = 0
+        $choiceString = "a"
         Clear-Host
     }
 
