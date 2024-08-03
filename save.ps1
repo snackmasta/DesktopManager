@@ -45,6 +45,13 @@ regedit.exe /s '"C:\Program Files\currone\DesktopManager\reg\$nameWithoutExtensi
 Stop-Process -Name explorer -Force
 "@
 
+# Define the content of the new .bat script
+$batchContent = @"
+set __COMPAT_LAYER=RunAsInvoker
+start "" "%~dp0..\bin\$nameWithoutExtension.exe"
+"@
+
 # Write the content to the new .ps1 script file
+$batchContent | Out-File -FilePath "C:\Program Files\currone\DesktopManager\bat\$nameWithoutExtension.bat" -Encoding ascii
 $scriptContent | Out-File -FilePath "C:\Program Files\currone\DesktopManager\profiles\$nameWithoutExtension.ps1" -Encoding ascii
 Invoke-PS2EXE "C:\Program Files\currone\DesktopManager\profiles\$nameWithoutExtension.ps1" "C:\Program Files\currone\DesktopManager\bin\$nameWithoutExtension.exe" -requireAdmin
